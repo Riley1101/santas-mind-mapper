@@ -14,7 +14,7 @@ const colors = [
 export function SantaPanel() {
   return (
     <Panel position="top-left">
-      <div className="w-full border p-2 bg-dark/80 backdrop-blur text-light rounded-md min-h-[400px] ">
+      <div className="w-full border p-2 bg-dark/80 backdrop-blur text-light rounded-md  ">
         <div>
           <span className="text-xxs">Color</span>
           <div className="flex gap-1">
