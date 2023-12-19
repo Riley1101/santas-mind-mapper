@@ -1,13 +1,13 @@
-import { AppProviders } from "./providers/AppProvider";
+import { ReactFlowProvider } from "reactflow";
 import { Container } from "./components/Container";
 import { Mind } from "./Mind";
 
 function App() {
   return (
     <Container>
-      <AppProviders>
+      <ReactFlowProvider>
         <Mind />
-      </AppProviders>
+      </ReactFlowProvider>
     </Container>
   );
 }
