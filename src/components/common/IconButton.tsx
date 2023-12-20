@@ -4,6 +4,7 @@ import { IconType, getIcon } from "../../utils/icons";
 type Props = {
   icon: IconType;
   isActive?: boolean;
+  onClick?: () => void;
 };
 
 export function IconButton({ icon, isActive = false, ...props }: Props) {

@@ -17,7 +17,7 @@ export function ToolButton({
     <button
       onClick={onClick}
       className={cx(
-        "w-12 h-12 border hover:border border-dark/30 rounded-md bg-opacity-80 grid place-items-center group hover:bg-primary/30",
+        "w-12 h-12 hover:border border-dark/30 rounded-md bg-opacity-80 grid place-items-center group hover:bg-primary/30",
         isActive ? "bg-primary/30" : "bg-transparent",
       )}
     >

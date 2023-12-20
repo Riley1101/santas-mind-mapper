@@ -5,12 +5,16 @@ import { getIcon } from "../../utils/icons";
 import { useState, useCallback } from "react";
 import { useSantaStore } from "src/stores/stores";
 
-export function House(props: NodeProps<NodeState>) {
+function SantaNode(props: NodeProps<NodeState>) {
   const [isEditing, setIsEditing] = useState(false);
-  const { updateNodeText, setCurrentNode } = useSantaStore((state) => ({
-    updateNodeText: state.updateNodeText,
-    setCurrentNode: state.setCurrentNode,
-  }));
+
+  const { updateNodeText, setCurrentNode, currentNode } = useSantaStore(
+    (state) => ({
+      updateNodeText: state.updateNodeText,
+      setCurrentNode: state.setCurrentNode,
+      currentNode: state.currentNode,
+    }),
+  );
 
   const toggleEditing = useCallback(() => {
     setIsEditing((prev) => !prev);
@@ -30,20 +34,31 @@ export function House(props: NodeProps<NodeState>) {
     [],
   );
   function onClick() {
+    if (props.id == currentNode) {
+      setCurrentNode(null);
+      return;
+    }
     setCurrentNode(props.id);
   }
   return (
     <div
       onClick={onClick}
       onDoubleClick={toggleEditing}
-      className={cx("grid max-w-max aspect-square px-4", isEditing && "border")}
+      className={cx(
+        "max-w-max  px-4 border-opacity-10 rounded-xl pt-4 max-h-max group",
+        isEditing || (currentNode === props.id && "border"),
+      )}
     >
-      <Handle type="target" position={Position.Left} />
-      <div className="grid place-items-center">
+      <Handle
+        type="target"
+        position={Position.Left}
+        className="!w-4 !h-24 !bg-primary !rounded-md !opacity-0 group-hover:!opacity-100"
+      />
+      <div className="grid place-items-center ">
         <img
           src={getIcon(props.data.icon)}
           className={cx(
-            "w-[100px] h-[100px] object-contain",
+            "h-full object-contain w-auto  transition-transform duration-300 ease-in-out transform-gpu",
             isEditing && "animate-pulse",
           )}
         />
@@ -57,20 +72,27 @@ export function House(props: NodeProps<NodeState>) {
             onKeyDown={onKeyDown}
             style={{
               color: props.data.color,
+              fontSize: `${props.data.size}rem`,
             }}
           />
         ) : (
-          <span
-            className="font-art text-lg"
+          <p
+            className="font-art  block mx-auto text-inherit"
             style={{
               color: props.data.color,
+              fontSize: `${props.data.size}rem`,
             }}
           >
             {props.data?.label}
-          </span>
+          </p>
         )}
       </div>
-      <Handle type="source" position={Position.Right} />
+      <Handle
+        className="!w-4 !h-24 !bg-primary !rounded-md !opacity-0 group-hover:!opacity-100"
+        type="source"
+        position={Position.Right}
+      />
     </div>
   );
 }
+export default SantaNode;
