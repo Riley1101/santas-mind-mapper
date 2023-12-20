@@ -1,6 +1,6 @@
 # Santa's Festive Mind Mapper 🎅🎄
 
-[Demo Image](https://github.com/Riley1101/santas-mind-mapper/blob/main/demo/demo.png)
+![Demo Image](https://github.com/Riley1101/santas-mind-mapper/blob/main/demo/demo.png)
 
 Ho ho ho! Welcome to Santa's Festive Mind Mapper, a merry React project powered by Vite and using the delightful pnpm package manager. This special mind mapping tool is designed to help Santa brainstorm gifts and keep track of children's locations, spreading holiday cheer across the globe. 🌍✨
 
