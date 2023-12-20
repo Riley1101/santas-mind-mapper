@@ -1,2 +1,2 @@
-export const FillModes :FillModeType[]= ["sm", "md", "lg"];
-export type FillModeType = "sm" | "md" | "lg";
+export const FontSize :FontSizeType[]= ["sm", "md", "lg","xl"];
+export type FontSizeType = "sm" | "md" | "lg" | "xl";

@@ -2,7 +2,7 @@ import { Panel } from "reactflow";
 import { IconButton } from "./common/IconButton";
 import cx from "classnames";
 import { icons } from "../utils/icons";
-import { FillModeType, FillModes } from "src/utils/tools";
+import { FontSizeType, FontSize } from "src/utils/tools";
 import { useSantaStore } from "src/stores/stores";
 
 const colors = [
@@ -25,16 +25,12 @@ export function SantaPanel() {
     if (!currentNode) return;
     updateNodeColor(currentNode, color);
   }
-  function updateIcon(icon: string) {
+  function updateIcon(icon: string | null) {
     if (!currentNode) return;
     updateNodeIcon(currentNode, icon);
   }
 
-  function updateFillMode(mode: FillModeType) {
-    console.log(mode);
-  }
-
-  function updateSize(size: number) {
+  function updateSize(size: FontSizeType) {
     if (!currentNode) return;
     updateNodeSize(currentNode, size);
   }
@@ -56,22 +52,29 @@ export function SantaPanel() {
               ></button>
             ))}
             <div className="border-l border-dark/30"></div>
-            <button
+            <label
               className={
                 cx(
-                  "w-5 h-5 hover:border border-light rounded-md bg-opacity-80 ",
+                  "cursor-pointer w-5 h-5 hover:border border-light rounded-md bg-opacity-80 ",
                 ) + "bg-dark"
               }
-            ></button>
+              htmlFor="color"
+            ></label>
+            <input
+              type="color"
+              className="hidden"
+              id="color"
+              onChange={(e) => updateColor(e.target.value)}
+            />
           </div>
         </div>
 
         <div>
-          <span className="text-xxs">Fill</span>
+          <span className="text-xxs">Font Size</span>
           <div className="flex gap-1">
-            {FillModes.map((c) => (
+            {FontSize.map((c) => (
               <button
-                onClick={() => updateFillMode(c)}
+                onClick={() => updateSize(c)}
                 key={c}
                 className="hover:bg-primary/30 uppercase border border-dark/30 text-xxs w-8 h-8 hover:border rounded-md bg-opacity-80 i"
               >
@@ -86,21 +89,7 @@ export function SantaPanel() {
             {icons.map((c) => (
               <IconButton key={c} icon={c} onClick={() => updateIcon(c)} />
             ))}
-          </div>
-        </div>
-
-        <div>
-          <span className="text-xxs">FontSize</span>
-          <div>
-            <input
-              onChange={(e) => updateSize(Number(e.target.value))}
-              type="range"
-              defaultValue={1}
-              min="2"
-              max="5"
-              step=".5"
-              className="accent-primary"
-            />
+            <IconButton icon={null} onClick={() => updateIcon(null)} />
           </div>
         </div>
       </div>

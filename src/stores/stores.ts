@@ -13,7 +13,7 @@ import {
 } from "reactflow";
 import { NodeType } from "src/components/nodes/types";
 import { mapNodeTypeToIcon } from "src/utils/icons";
-import { FillModeType } from "src/utils/tools";
+import { FontSizeType } from "src/utils/tools";
 import { create } from "zustand";
 import demo1 from "src/samples/demo1";
 
@@ -21,7 +21,6 @@ const initialNodes = demo1;
 
 export type SantaState = {
   currentNode?: string | null;
-  fillMode: FillModeType | null;
   size?: number;
   nodes: Node[];
   edges: Edge[];
@@ -32,9 +31,8 @@ export type SantaState = {
   setCurrentNode: (nodeId: string | null) => void;
   updateNodeText: (nodeId: string, text: string) => void;
   updateNodeColor: (nodeId: string, color: string) => void;
-  updateNodeIcon: (nodeId: string, icon: string) => void;
-  updateFillMode: (nodeId: string, mode: FillModeType) => void;
-  updateNodeSize: (nodeId: string, size: number) => void;
+  updateNodeIcon: (nodeId: string, icon: string | null) => void;
+  updateNodeSize: (nodeId: string, size: FontSizeType) => void;
 };
 
 // this is our useStore hook that we can use in our components to get parts of
@@ -42,9 +40,7 @@ export type SantaState = {
 export const useSantaStore = create<SantaState>((set, get) => ({
   currentNode: null,
   nodes: initialNodes.nodes,
-
   size: 1,
-  fillMode: null,
   edges: initialNodes.edges,
   onNodesChange: (changes: NodeChange[]) => {
     set({
@@ -89,7 +85,7 @@ export const useSantaStore = create<SantaState>((set, get) => ({
     });
     set({ nodes });
   },
-  updateNodeIcon: (nodeId: string, icon: string) => {
+  updateNodeIcon: (nodeId: string, icon: string | null) => {
     const nodes = get().nodes.map((node) => {
       if (node.id === nodeId) {
         node.data = {
@@ -118,25 +114,26 @@ export const useSantaStore = create<SantaState>((set, get) => ({
     set({ nodes });
   },
 
-  updateFillMode: (nodeId: string, mode: FillModeType) => {
+  updateNodeSize: (nodeId: string, size: FontSizeType) => {
+    let fontSize = 1;
+    switch (size) {
+      case "sm":
+        fontSize = 1;
+        break;
+      case "md":
+        fontSize = 2;
+        break;
+      case "lg":
+        fontSize = 3;
+        break;
+      case "xl":
+        fontSize = 4;
+    }
     const nodes = get().nodes.map((node) => {
       if (node.id === nodeId) {
         node.data = {
           ...node.data,
-          fillMode: mode,
-        };
-      }
-      return node;
-    });
-    set({ nodes });
-  },
-
-  updateNodeSize: (nodeId: string, size: number) => {
-    const nodes = get().nodes.map((node) => {
-      if (node.id === nodeId) {
-        node.data = {
-          ...node.data,
-          size,
+          size: fontSize,
         };
       }
       return node;

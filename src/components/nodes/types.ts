@@ -1,12 +1,12 @@
 import type { IconType } from "src/utils/icons";
-import { FillModeType } from "src/utils/tools";
+import { FontSizeType } from "src/utils/tools";
 
-export type NodeType = "gift" | "house";
+export type NodeType = "gift" | "house"  ;
 
 export interface NodeState {
   label?: string;
   color: string;
   size: number;
   icon: IconType;
-  fillMode: FillModeType;
+  fillMode: FontSizeType;
 }

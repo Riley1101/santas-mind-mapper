@@ -45,8 +45,12 @@ function SantaNode(props: NodeProps<NodeState>) {
       onClick={onClick}
       onDoubleClick={toggleEditing}
       className={cx(
-        "max-w-max  px-4 border-opacity-10 rounded-xl pt-4 max-h-max group",
-        isEditing || (currentNode === props.id && "border"),
+        "relative max-w-max p-12 rounded-xl  max-h-max group ",
+        isEditing ||
+          (currentNode === props.id &&
+            "bg-white/20 backdrop-blur border border-gray-200 "),
+        props.data.icon == null &&
+          "bg-white/20 backdrop-blur border border-gray-200 ",
       )}
     >
       <Handle
@@ -54,21 +58,23 @@ function SantaNode(props: NodeProps<NodeState>) {
         position={Position.Left}
         className="!w-4 !h-24 !bg-primary !rounded-md !opacity-0 group-hover:!opacity-100"
       />
-      <div className="grid place-items-center ">
-        <img
-          src={getIcon(props.data.icon)}
-          className={cx(
-            "h-full object-contain w-auto  transition-transform duration-300 ease-in-out transform-gpu",
-            isEditing && "animate-pulse",
-          )}
-        />
+      <div className="grid place-items-center cursor-pointer">
+        {props.data.icon && (
+          <img
+            src={getIcon(props.data.icon)}
+            className={cx(
+              "h-full object-contain w-auto  transition-transform duration-300 ease-in-out transform-gpu mb-4",
+              isEditing && "animate-pulse",
+            )}
+          />
+        )}
 
         {isEditing ? (
           <input
             autoFocus
             onChange={onChange}
             placeholder="Enter name"
-            className="font-art nodrag outline-none max-w-[100px] text-center bg-transparent inline"
+            className="font-art font-bold nodrag outline-none  text-center bg-transparent inline"
             onKeyDown={onKeyDown}
             style={{
               color: props.data.color,
@@ -77,7 +83,7 @@ function SantaNode(props: NodeProps<NodeState>) {
           />
         ) : (
           <p
-            className="font-art  block mx-auto text-inherit"
+            className="font-art  block mx-auto text-inherit font-bold"
             style={{
               color: props.data.color,
               fontSize: `${props.data.size}rem`,

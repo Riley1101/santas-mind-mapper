@@ -1,14 +1,19 @@
 import cx from "classnames";
 import { IconType, getIcon } from "../../utils/icons";
+import noIcon from "assets/icons/no_icon.svg";
 
 type Props = {
-  icon: IconType;
+  icon: IconType | null;
   isActive?: boolean;
   onClick?: () => void;
 };
 
 export function IconButton({ icon, isActive = false, ...props }: Props) {
-  const iconPath = getIcon(icon);
+  let iconPath = noIcon;
+  if (icon !== null) {
+    iconPath = getIcon(icon);
+  }
+
   return (
     <button
       {...props}
@@ -19,7 +24,7 @@ export function IconButton({ icon, isActive = false, ...props }: Props) {
     >
       <img
         src={iconPath}
-        alt={icon}
+        alt={icon || "no-icon"}
         width={20}
         height={20}
         className={cx(

@@ -1,8 +1,8 @@
 import ReactFlow, { SelectionMode } from "reactflow";
+import SantaNode from "./components/nodes/SantaNode";
 import type { NodeProps } from "reactflow";
 import type { SantaState } from "./stores/stores";
 import { Gift } from "./components/nodes/Gift";
-import SantaNode from "./components/nodes/SantaNode";
 import { NodeType } from "./components/nodes/types";
 import { SantaBackground } from "./components/SantaBackground";
 import { SantaControls } from "./components/SantaControl";
