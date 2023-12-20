@@ -5,25 +5,22 @@ import { ToolButton } from "./common/ToolButton";
 import { useState } from "react";
 
 export function SantaTools() {
-  const [isOpen, setIsOpen] = useState(false);
   const { addNode, nodes, edges } = useSantaStore((state) => ({
     addNode: state.addNode,
     nodes: state.nodes,
     edges: state.edges,
   }));
 
-  /**
-   * Add a new node to the graph
-   * Can set node x position to a max with screen
-   */
+  const [isOpen, setIsOpen] = useState(false);
+
   function handleAddNode(type: NodeType) {
     addNode(type);
   }
 
   function copyCode() {
     const data = {
-      nodes: nodes,
-      edges: edges,
+      nodes,
+      edges,
     };
     navigator.clipboard.writeText(JSON.stringify(data));
   }
@@ -35,14 +32,12 @@ export function SantaTools() {
           <div className="flex gap-1">
             <ToolButton
               icon="house_one"
-              onClick={() => handleAddNode("house")}
+              onClick={() => handleAddNode("santa")}
             />
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={
-                "w-12 h-12 hover:border border-dark/30 rounded-md bg-opacity-80 grid place-items-center group hover:bg-primary/30"
-              }
+              className="w-12 h-12 hover:border border-dark/30 rounded-md bg-opacity-80 grid place-items-center group hover:bg-primary/30"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

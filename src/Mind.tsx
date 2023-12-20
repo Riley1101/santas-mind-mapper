@@ -2,7 +2,6 @@ import ReactFlow, { SelectionMode } from "reactflow";
 import SantaNode from "./components/nodes/SantaNode";
 import type { NodeProps } from "reactflow";
 import type { SantaState } from "./stores/stores";
-import { Gift } from "./components/nodes/Gift";
 import { NodeType } from "./components/nodes/types";
 import { SantaBackground } from "./components/SantaBackground";
 import { SantaControls } from "./components/SantaControl";
@@ -13,10 +12,12 @@ import { shallow } from "zustand/shallow";
 import { useSantaStore } from "./stores/stores";
 
 const nodeTypes: Record<NodeType, (node: NodeProps) => React.ReactNode> = {
-  gift: Gift,
-  house: SantaNode,
+  santa: SantaNode,
 };
 
+/**
+ * Main Mind component that represents the Santa Mind application.
+ */
 export function Mind() {
   const selector = (state: SantaState) => ({
     nodes: state.nodes,

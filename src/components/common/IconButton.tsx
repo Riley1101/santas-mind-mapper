@@ -1,6 +1,6 @@
 import cx from "classnames";
-import { IconType, getIcon } from "../../utils/icons";
 import noIcon from "assets/icons/no_icon.svg";
+import { IconType, getIcon } from "utils/icons";
 
 type Props = {
   icon: IconType | null;
@@ -8,6 +8,12 @@ type Props = {
   onClick?: () => void;
 };
 
+/**
+ * IconButton Component for SantaPanel
+ *
+ * An interactive button component with an optional icon, supporting customization
+ * for active state, click event, and visual feedback.
+ */
 export function IconButton({ icon, isActive = false, ...props }: Props) {
   let iconPath = noIcon;
   if (icon !== null) {

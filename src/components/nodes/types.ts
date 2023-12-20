@@ -1,7 +1,7 @@
 import type { IconType } from "src/utils/icons";
 import { FontSizeType } from "src/utils/tools";
 
-export type NodeType = "gift" | "house"  ;
+export type NodeType = "santa";
 
 export interface NodeState {
   label?: string;

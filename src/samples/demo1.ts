@@ -2,7 +2,7 @@ const demo = {
   nodes: [
     {
       id: "0",
-      type: "house",
+      type: "santa",
       data: {
         label: "Starts at the North pole",
         icon: "ready_santa",
@@ -18,7 +18,7 @@ const demo = {
     },
     {
       id: "1",
-      type: "house",
+      type: "santa",
       data: {
         label: "Visit to someplace",
         icon: "christmas_tree_two",
@@ -34,7 +34,7 @@ const demo = {
     },
     {
       id: "2",
-      type: "house",
+      type: "santa",
       data: { label: "Go somewhere", icon: "christmas_tree_two", size: 4 },
       position: { x: 811.019388824153, y: 1255.3117182753297 },
       width: 342,
@@ -45,7 +45,7 @@ const demo = {
     },
     {
       id: "3",
-      type: "house",
+      type: "santa",
       data: { label: "I love it", icon: "star", size: 3 },
       position: { x: 1955.892121210623, y: 68.9848787890968 },
       width: 250,
@@ -56,8 +56,8 @@ const demo = {
     },
     {
       id: "4",
-      type: "house",
-      data: { label: "Visit to ella ", icon: "house_two", size: 3 },
+      type: "santa",
+      data: { label: "Visit to ella ", icon: "santa_two", size: 3 },
       position: { x: 1578.0678249152252, y: 1550.7947889855807 },
       width: 304,
       height: 409,
@@ -67,7 +67,7 @@ const demo = {
     },
     {
       id: "5",
-      type: "house",
+      type: "santa",
       data: { label: "Pick up more gifts", icon: "gift", size: 3 },
       position: { x: 2824.089927015798, y: 666.1827277792331 },
       width: 316,
@@ -78,7 +78,7 @@ const demo = {
     },
     {
       id: "6",
-      type: "house",
+      type: "santa",
       data: { label: "Ring the bell", icon: "bell", size: 3 },
       position: { x: 1608.8306084261635, y: 618.1814803571458 },
       width: 238,
@@ -89,7 +89,7 @@ const demo = {
     },
     {
       id: "7",
-      type: "house",
+      type: "santa",
       data: { label: "Name!", icon: "ready_date", size: 3, color: "#10B981" },
       position: { x: 172.68131241210818, y: 277.9364339065845 },
       width: 261,
@@ -100,7 +100,7 @@ const demo = {
     },
     {
       id: "8",
-      type: "house",
+      type: "santa",
       data: { label: "Name!", icon: "lollipop", size: 3 },
       position: { x: 2256.220779819091, y: 1079.982463990522 },
       width: 245,

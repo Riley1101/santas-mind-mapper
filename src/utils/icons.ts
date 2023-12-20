@@ -15,8 +15,7 @@ import christmas_tree_two from "assets/icons/christmas_tree_two.png";
 import { NodeType } from "src/components/nodes/types";
 
 export const mapNodeTypeToIcon: Record<NodeType, IconType> = {
-  gift: "gift",
-  house: "house_one",
+  santa: "house_one",
 };
 
 export const iconMap: Record<IconType, string> = {

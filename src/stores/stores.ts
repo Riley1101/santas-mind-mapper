@@ -11,11 +11,12 @@ import {
   OnEdgesChange,
   OnNodesChange,
 } from "reactflow";
-import { NodeType } from "src/components/nodes/types";
-import { mapNodeTypeToIcon } from "src/utils/icons";
-import { FontSizeType } from "src/utils/tools";
-import { create } from "zustand";
 import demo1 from "src/samples/demo1";
+import { FontSizeType } from "src/utils/tools";
+import { NodeType } from "src/components/nodes/types";
+import { create } from "zustand";
+import { mapNodeTypeToIcon } from "src/utils/icons";
+import { mapSizeToValue } from "src/utils/tools";
 
 const initialNodes = demo1;
 
@@ -35,31 +36,39 @@ export type SantaState = {
   updateNodeSize: (nodeId: string, size: FontSizeType) => void;
 };
 
-// this is our useStore hook that we can use in our components to get parts of
-// the store and call actions
+/**
+ * Zustand store for the Santa app.
+ * Keeps track of the current node, the nodes and edges in the graph,
+ * and the callbacks for when the nodes and edges change.
+ */
 export const useSantaStore = create<SantaState>((set, get) => ({
   currentNode: null,
   nodes: initialNodes.nodes,
   size: 1,
   edges: initialNodes.edges,
+
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     });
   },
+
   onEdgesChange: (changes: EdgeChange[]) => {
     set({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
+
   onConnect: (connection: Connection) => {
     set({
       edges: addEdge(connection, get().edges),
     });
   },
+
   setCurrentNode: (nodeId: string | null) => {
     set({ currentNode: nodeId });
   },
+
   updateNodeColor: (nodeId: string, color: string) => {
     const nodes = get().nodes.map((node) => {
       if (node.id === nodeId) {
@@ -108,32 +117,18 @@ export const useSantaStore = create<SantaState>((set, get) => ({
         icon: mapNodeTypeToIcon[type],
         size: 3,
       },
-      position: { x: lastNode.position.x + 100, y: lastNode.position.y + 100 },
+      position: { x: lastNode.position.x + 400, y: lastNode.position.y },
     };
     const nodes = get().nodes.concat(newNode);
     set({ nodes });
   },
 
   updateNodeSize: (nodeId: string, size: FontSizeType) => {
-    let fontSize = 1;
-    switch (size) {
-      case "sm":
-        fontSize = 1;
-        break;
-      case "md":
-        fontSize = 2;
-        break;
-      case "lg":
-        fontSize = 3;
-        break;
-      case "xl":
-        fontSize = 4;
-    }
     const nodes = get().nodes.map((node) => {
       if (node.id === nodeId) {
         node.data = {
           ...node.data,
-          size: fontSize,
+          size: mapSizeToValue(size),
         };
       }
       return node;

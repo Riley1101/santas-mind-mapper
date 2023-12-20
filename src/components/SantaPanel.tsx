@@ -1,8 +1,8 @@
-import { Panel } from "reactflow";
-import { IconButton } from "./common/IconButton";
 import cx from "classnames";
-import { icons } from "../utils/icons";
 import { FontSizeType, FontSize } from "src/utils/tools";
+import { IconButton } from "components/common/IconButton";
+import { Panel } from "reactflow";
+import { icons } from "utils/icons";
 import { useSantaStore } from "src/stores/stores";
 
 const colors = [
@@ -21,21 +21,23 @@ export function SantaPanel() {
       updateNodeIcon: state.updateNodeIcon,
       updateNodeSize: state.updateNodeSize,
     }));
-  function updateColor(color: string) {
+
+  if (!currentNode) return null;
+
+  function handleColorUpdate(color: string) {
     if (!currentNode) return;
     updateNodeColor(currentNode, color);
   }
-  function updateIcon(icon: string | null) {
+
+  function handleIconUpdate(icon: string | null) {
     if (!currentNode) return;
     updateNodeIcon(currentNode, icon);
   }
 
-  function updateSize(size: FontSizeType) {
+  function handleSizeUpdate(size: FontSizeType) {
     if (!currentNode) return;
     updateNodeSize(currentNode, size);
   }
-
-  if (!currentNode) return null;
 
   return (
     <Panel position="top-left">
@@ -45,9 +47,9 @@ export function SantaPanel() {
           <div className="flex gap-1">
             {colors.map((c) => (
               <button
-                onClick={() => updateColor(c)}
+                onMouseDown={() => handleColorUpdate(c)}
                 key={c}
-                className="w-5 h-5 hover:border border-light rounded-md bg-opacity-80 i"
+                className={`w-5 h-5 hover:border border-light rounded-md bg-opacity-80 bg-dark`}
                 style={{ backgroundColor: c }}
               ></button>
             ))}
@@ -64,7 +66,7 @@ export function SantaPanel() {
               type="color"
               className="hidden"
               id="color"
-              onChange={(e) => updateColor(e.target.value)}
+              onChange={(e) => handleColorUpdate(e.target.value)}
             />
           </div>
         </div>
@@ -74,9 +76,9 @@ export function SantaPanel() {
           <div className="flex gap-1">
             {FontSize.map((c) => (
               <button
-                onClick={() => updateSize(c)}
+                onClick={() => handleSizeUpdate(c)}
                 key={c}
-                className="hover:bg-primary/30 uppercase border border-dark/30 text-xxs w-8 h-8 hover:border rounded-md bg-opacity-80 i"
+                className="hover:bg-primary/30 uppercase border border-dark/30 text-xxs w-8 h-8 hover:border rounded-md bg-opacity-80 "
               >
                 {c}
               </button>
@@ -87,9 +89,13 @@ export function SantaPanel() {
           <span className="text-xxs">Icons</span>
           <div className="grid grid-cols-5 gap-1">
             {icons.map((c) => (
-              <IconButton key={c} icon={c} onClick={() => updateIcon(c)} />
+              <IconButton
+                key={c}
+                icon={c}
+                onClick={() => handleIconUpdate(c)}
+              />
             ))}
-            <IconButton icon={null} onClick={() => updateIcon(null)} />
+            <IconButton icon={null} onClick={() => handleIconUpdate(null)} />
           </div>
         </div>
       </div>
