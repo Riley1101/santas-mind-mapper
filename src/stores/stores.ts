@@ -15,20 +15,9 @@ import { NodeType } from "src/components/nodes/types";
 import { mapNodeTypeToIcon } from "src/utils/icons";
 import { FillModeType } from "src/utils/tools";
 import { create } from "zustand";
+import demo1 from "src/samples/demo1";
 
-const initialNodes = [
-  {
-    id: "0",
-    type: "house",
-    data: {
-      label: "Name!",
-      icon: "ready_santa",
-      color: "text-black",
-      size: 3,
-    },
-    position: { x: 400, y: 400 },
-  },
-];
+const initialNodes = demo1;
 
 export type SantaState = {
   currentNode?: string | null;
@@ -52,10 +41,11 @@ export type SantaState = {
 // the store and call actions
 export const useSantaStore = create<SantaState>((set, get) => ({
   currentNode: null,
-  nodes: initialNodes,
+  nodes: initialNodes.nodes,
+
   size: 1,
   fillMode: null,
-  edges: [],
+  edges: initialNodes.edges,
   onNodesChange: (changes: NodeChange[]) => {
     set({
       nodes: applyNodeChanges(changes, get().nodes),

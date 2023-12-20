@@ -4,9 +4,10 @@ import { useSantaStore } from "src/stores/stores";
 import { ToolButton } from "./common/ToolButton";
 
 export function SantaTools() {
-  const { addNode, nodes } = useSantaStore((state) => ({
+  const { addNode, nodes, edges } = useSantaStore((state) => ({
     addNode: state.addNode,
     nodes: state.nodes,
+    edges: state.edges,
   }));
 
   /**
@@ -18,8 +19,11 @@ export function SantaTools() {
   }
 
   function copyCode() {
-    const code = JSON.stringify(nodes);
-    navigator.clipboard.writeText(code);
+    const data = {
+      nodes: nodes,
+      edges: edges,
+    };
+    navigator.clipboard.writeText(JSON.stringify(data));
     alert("Copied to clipboard");
   }
 
