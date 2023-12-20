@@ -110,14 +110,17 @@ export const useSantaStore = create<SantaState>((set, get) => ({
   addNode: (type: NodeType) => {
     const lastNode = get().nodes[get().nodes.length - 1];
     const newNode = {
-      id: `${parseInt(lastNode.id) + 1}`,
+      id: `${lastNode ? parseInt(lastNode.id) + 1 : 0}`,
       type,
       data: {
         label: "Name!",
         icon: mapNodeTypeToIcon[type],
         size: 3,
       },
-      position: { x: lastNode.position.x + 400, y: lastNode.position.y },
+      position: {
+        x: lastNode?.position?.x + 400 || 0,
+        y: lastNode?.position?.y || 0,
+      },
     };
     const nodes = get().nodes.concat(newNode);
     set({ nodes });
